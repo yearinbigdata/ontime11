@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Delay Chart</title>
+<link rel="stylesheet" href="../thymeleaf/css/bootstrap.css" th:remove="all">
+<style type="text/css">
+@IMPORT url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+
+html, body {
+	height: 100%;
+}
+
+body, table, dic, p{
+	font-family: 'Nanum Gothic';
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#body{
+	min-height: 100%;
+}
+
+#content{
+	padding-bottom: 1em;
+}
+
+#footer{
+	border-top: 1px;
+	border-bottom-color: maroon;
+	padding-bottom: 5em;
+	padding-top: 5em;
+	margin-top: -1em;
+	height: 1em;
+}
+
+div.type03{
+	font-family: 'Nanum Gothic';
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+div.type03-title {
+	font-family: 'Nanum Gothic';
+	font-size: 20px;
+	/* 	font-weight: bold; */ padding-right : 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 15px
+}
+
+.type03-div-center {
+	text-align: center;
+	font-size: 20px;
+	font-family: 'Nanum Gothic';
+	padding: 20px 5px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.type03-div-left {
+	text-align: left;
+	font-size: 20px;
+	font-family: 'Nanum Gothic';
+	padding: 20px 5px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.type03-div-right {
+	text-align: right;
+	font-family: 'Nanum Gothic';
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+table.type03 tr {
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: center;
+	vertical-align: center;
+	line-height: 0.8;
+	border-top: 1px solid #ccc;
+	margin: 20px 10px;
+}
+
+table.type03 th {
+	width: 150px;
+	padding: 10px;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+	vertical-align: center;
+	border-bottom: 1px solid #ccc;
+	background: #337ab7;
+}
+
+table.type03 td {
+	width: 350px;
+	height: auto;
+	padding: 10px;
+	vertical-align: center;
+	border-bottom: 1px solid #ccc;
+}
+
+div.type04 {
+	text-align: center;
+	font-family: 'Nanum Gothic';
+	font-size: 36px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-top: 50px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+table.type04 tr {
+	border-spacing: 1px;
+	line-height: 0.8;
+	margin: 20px 10px;
+}
+
+table.type04 td {
+	width: 700px;
+	height: auto;
+	padding: 10px;
+}
+
+div.type05 {
+	width: 1050px;
+	height: auto;
+}
+table.type05 td {
+	width: 1050px;
+	height: auto;
+	padding: 10px;
+}
+
+table.type06 td {
+	width: 525px;
+	height: auto;
+	padding: 10px;
+}
+
+.selectBox {
+	width: 270px;
+	height: 35px;
+	font-size: 14px;
+	padding: 2px;
+	border: 1px solid #ccc;
+/* 	background: url(http://icons.iconarchive.com/icons/icons8/ios7/128/Arrows-Down-4-icon.png) right center */
+/* 		no-repeat;  */
+		/* background로 배경 깔아줌 */
+	background-color: #fff;
+	appearance: none; /* 기본 스타일 없애기 */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+}
+
+.selectBox select::-ms-expand {
+	display: none;
+} /* ie에서 기본 스타일 없애줌 */
+
+.selectBox02 {
+	width: 15%;
+	height: 35px;
+	padding: 2px;
+	font-size: 14px;
+	border: 1px solid #ccc;
+/* 	background: url(http://icons.iconarchive.com/icons/icons8/ios7/128/Arrows-Down-4-icon.png) right center */
+/* 		no-repeat;  */
+		/* background로 배경 깔아줌 */
+	background-color: #fff;
+	appearance: none; /* 기본 스타일 없애기 */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+}
+
+.selectBox select::-ms-expand {
+	display: none;
+} /* ie에서 기본 스타일 없애줌 */
+
+
+a.type03 {
+	background-color: #337ab7;
+	width: 90px;
+	height: 35px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	padding: 8px;
+	margin-right: 1px;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+button.type03 {
+	background-color: #337ab7;
+	width: 70px;
+	height: 35px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	margin: 8px;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+</style>
+</head>
+<body>
+	<div class="type04">
+		Carriers Delay
+	</div>
+<!-- 	<div layout:fragment="content"> -->
+	<div layout:fragment="content" class="type03">
+
+ <a th:href="@{total}" class="type03"> 전체 지연</a>
+ <a th:href="@{month}" class="type03"> 월별 지연</a>
+ <a th:href="@{arrDep}" class="type03"> 도착/출발 지연</a>
+ <a th:href="@{arrDepandMonth}" class="type03"> 월 & 도착/출발 지연</a>
+
+
+</div>
+<!-- 		<div>Chart</div> -->
+	</div>
+	
+	<th:block layout:fragment="script"></th:block>
+	<hr>
+		<footer id="footer">
+			<div class="type03-div-center">I Hate Delay</div>
+		</footer>
+</body>
+</html>

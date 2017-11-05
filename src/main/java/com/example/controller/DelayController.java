@@ -28,6 +28,7 @@ public class DelayController {
 
 	@Autowired
 	private DelayRepository repo;
+	@Autowired
 	private TotalDelayRepository repo2;
 	
 	@GetMapping("/home")
@@ -46,6 +47,20 @@ public class DelayController {
 		
 	}
 	
+//	@GetMapping("/total")
+//	public String total(@ModelAttribute("pageVO") PageVO vo, Model model) {
+//		
+//		Pageable pageable = vo.makePageable(0, "carrierName");
+//		Predicate predicate = repo.makePredicate(vo.getType(), vo.getKeyword());
+//
+//		Page<DelayDO> result = repo.findAll(predicate, pageable);
+//
+//		model.addAttribute("pageMaker", new PageMaker(result));
+//		
+//
+//		return "thymeleaf/delay/total";
+//	}	
+	
 	@GetMapping("/total")
 	public String total(@ModelAttribute("pageVO") PageVO vo, Model model) {
 		
@@ -56,24 +71,24 @@ public class DelayController {
 
 		model.addAttribute("pageMaker", new PageMaker(result));
 		
+		List<totalDelayDO> totalDelays = repo2.findAll();
+		model.addAttribute("totalDelays", totalDelays );
+		
 
 		return "thymeleaf/delay/total";
 	}	
 	
-//	@GetMapping("/total")
-//	public String total(@ModelAttribute("totalDelay") totalDelayDO vo, Model model) {
-//		
-////		Predicate predicate = repo.makePredicate(vo.getType(), vo.getKeyword());
-//		
-//		List<totalDelayDO> result = repo2.findAll();
-////		Page<DelayDO> result = repo.findAll(predicate, pageable);
-//
-//		model.addAttribute("totalDelay", result );
-//		
-//
-//		return "thymeleaf/delay/total";
-//		
-//	}
+	@GetMapping("/total2")
+	public String total(@ModelAttribute("totalDelay") totalDelayDO vo, Model model) {
+		
+		List<totalDelayDO> result = repo2.findAll();
+
+		model.addAttribute("totalDelay", result );
+		
+
+		return "thymeleaf/delay/total2";
+		
+	}
 	
 	@GetMapping("/month")
 	public String month(@ModelAttribute("pageVO") PageVO vo, Model model) {

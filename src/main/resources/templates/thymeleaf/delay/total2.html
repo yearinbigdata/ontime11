@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/ontime}">
+
+<head>
+<!-- <meta charset="utf-8"> -->
+<!--/*/ 
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css">
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/webjars/animate.css/3.5.2/animate.css">
+<script type="text/javascript" src="/webjars/jquery/1.11.1/jquery.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/3.3.7/js/bootstrap.js"></script>
+<script type="text/javascript" src="/webjars/chartjs/2.6.0/Chart.bundle.js"></script>
+/*/-->
+<link rel="stylesheet" href="../css/bootstrap.css" th:remove="all">
+<link rel="stylesheet" href="../css/animate.css" th:remove="all">
+
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+<div layout:fragment="content" class="type03">
+<div>total2</div>
+  <!-- Identify where the chart should be drawn. -->
+  <div id="barchart"></div>  
+</div>
+  <th:block layout:fragment="script">
+  <script type="text/javascript">    
+  
+  google.load('visualization', '1', {packages: ['corechart', 'bar']});
+  google.setOnLoadCallback(drawMaterial);
+
+  function drawMaterial() {
+  var data = google.visualization.arrayToDataTable([
+  ['carriername', 'delay'],
+  <?php 
+		  $con = mysqli_connect('localhost','yearin','1234','world');
+  if (!$con) {
+	    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+	    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+	    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+	    exit;
+	}
+
+	echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
+	echo "Host information: " . mysqli_get_host_info($con) . PHP_EOL;
+
+	mysqli_close($con);
+  while($row = mysqli_fetch_array($exec)){
+	  
+  echo "['".$row['carriername']."',";
+  $query = "SELECT delay, carriername FROM tbl_totaldelay GROUP BY carriername";
+
+  $exec = mysqli_query($con,$query);
+//   $query2 = "SELECT delay FROM tbl_totaldelay WHERE carriername='".$row['carriername']."' ";
+//   $exec2 = mysqli_query($con,$query2);
+  $row2 = mysqli_fetch_assoc($exec);
+  
+  echo $row2['delay'];
+  
+//   $rvisits = $row['count']-$row2['count'];
+
+//   echo ",".$rvisits."],";
+
+  }
+  ?>
+  ]);
+
+  var options = {
+  
+  title: 'delay',
+  
+  bars: 'horizontal'
+  };
+  var material = new google.charts.Bar(document.getElementById('barchart'));
+  material.draw(data, options);
+  }
+  </script>
+  </th:block>
+</body>
+</html>

@@ -11,7 +11,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
 
-public interface TotalDelayRepository extends JpaRepository<totalDelayDO, Integer>, QuerydslPredicateExecutor<totalDelayDO>{
+public interface TotalDelayRepository extends JpaRepository<totalDelayDO, String>, QuerydslPredicateExecutor<totalDelayDO>{
 
 
 }

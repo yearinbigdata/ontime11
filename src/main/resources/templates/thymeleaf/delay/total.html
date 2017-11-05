@@ -14,42 +14,105 @@
 /*/-->
 <link rel="stylesheet" href="../css/bootstrap.css" th:remove="all">
 <link rel="stylesheet" href="../css/animate.css" th:remove="all">
-
+<!-- <script type="text/javascript" src="ajax-sample.js"></script> -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 <div layout:fragment="content" class="type03">
-  <!-- Identify where the chart should be drawn. -->
-  <div id="myPieChart"></div>
+<div id="barchart_values" style="width: 900px; height: 300px;"></div>
 </div>
   <th:block layout:fragment="script">
   <script type="text/javascript">    
+// 	 var list = $("[totalDelays]");
+// 	 console.log(list);
+
   
+//   google
   google.charts.load('current', {packages: ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     
-
+    
+    
     function drawChart() {
-      // Define the chart to be drawn.
-      var data = new google.visualization.DataTable();
-      data.addColumn()
-      data.addColumn('string', 'Element');
-      data.addColumn('number', 'Percentage');
-      data.addRows([
-        ['Nitrogen', 0.78],
-        ['Oxygen', 0.21],
-        ['Other', 0.01]
-      ]);
+    
+    	
+    	var data = google.visualization.arrayToDataTable([
+    		["carriername","delay", { role: "style" } ],
+    		["AirTran Airways Corporation",1031426, "blue"],
+    		["Alaska Airlines Inc.",2561037, "blue"],
+    		["Aloha Airlines Inc.",102037, "blue"],
+    		["America West Airlines Inc. (Merged with US Airways 9/05. Stopped reporting 10/07.)",3324163, "blue"],
+    		["American Airlines Inc.",12833896, "blue"],
+    		["American Eagle Airlines Inc.",3061296, "blue"],
+    		["ATA Airlines d/b/a ATA",141866, "blue"],
+    		["Atlantic Southeast Airlines",1446016, "blue"],
+    		["Comair Inc.",1049157, "blue"],
+    		["Continental Air Lines Inc.",6883481, "blue"],
+    		["Delta Air Lines Inc.",16889842, "blue"],
+    		["Eastern Air Lines Inc.",636299, "blue"],
+    		["Expressjet Airlines Inc.",1761403, "blue"],
+    		["Frontier Airlines Inc.",309366, "blue"],
+    		["Hawaiian Airlines Inc.",116179, "blue"],
+    		["Independence Air",477388, "blue"],
+    		["JetBlue Airways",701689, "blue"],
+    		["Mesa Airlines Inc.",631259, "blue"],
+    		["Midway Airlines Inc. (1)",46128, "blue"],
+    		["Northwest Airlines Inc.",7732601, "blue"],
+    		["Pacific Southwest Airlines",94413, "blue"],
+    		["Pan American World Airways (1)",223042, "blue"],
+    		["Piedmont Aviation Inc.",1142322, "blue"],
+    		["Pinnacle Airlines Inc.",343652, "blue"],
+    		["Skywest Airlines Inc.",2260743, "blue"],
+    		["Southwest Airlines Co.",12986127, "blue"],
+    		["Trans World Airways LLC",3145088, "blue"],
+    		["United Air Lines Inc.",12325423, "blue"],
+    		["US Airways Inc. (Merged with America West 9/05. Reporting for both starting 10/07.)",13600161, "blue"]
+          ]);
 
-      // Instantiate and draw the chart.
-      var chart = new google.visualization.PieChart(document.getElementById('myPieChart'));
-      chart.draw(data, null);
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+                         { calc: "stringify",
+                           sourceColumn: 1,
+                           type: "string",
+                           role: "annotation" },
+                         2]);
+
+        var options = {
+          title: "Total Carriers DelayCount",
+          width: 1500,
+          height: 1000,
+          bar: {groupWidth: "20%"},
+          legend: { position: "none" },
+        };
+        var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+        chart.draw(view, options);
+//         chart.draw(view, null);
     }
+    
+    
+    
+    
+    
+    
+    
+// PieChart Classic
+//     function drawChart() {
+//       // Define the chart to be drawn.
+//       var data = new google.visualization.DataTable();
+//       data.addColumn('string', 'Name');
+//       data.addColumn('number', 'Delay');
+//       data.addRows([
+//         ['AirTran Airways Corporation', 11111],
+//         ['Alaska Airlines Inc.', 11111],
+//       ]);
+
+//       // Instantiate and draw the chart.
+// //       var chart = new google.visualization.PieChart(document.getElementById('myPieChart'));
+//       var chart = new google.visualization.Bar(document.getElementById('myPieChart'));
+//       chart.draw(data, null);
+//     }
   </script>
   </th:block>
-  <div layout:fragment="content" class="type03">
-  <!-- Identify where the chart should be drawn. -->
-  <div id="myPieChart"></div>
-</div>
+
 </body>
 </html>

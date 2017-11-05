@@ -7,13 +7,13 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="tbl_totalDelay")
+@Table(name="tbl_totaldelay")
 @Data
 public class totalDelayDO {
 	
 	@Id
-	private String carrierName;
-	private String carrierCode;
+	private String carriername;
+	private String carriercode;
 	private Integer delay;
 
 }

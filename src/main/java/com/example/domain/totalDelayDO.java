@@ -1,6 +1,5 @@
 package com.example.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -8,18 +7,13 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="tbl_delaycount")
+@Table(name="tbl_totalDelay")
 @Data
-public class DelayDO {
+public class totalDelayDO {
 	
 	@Id
-	@Column(name="carrierName")
 	private String carrierName;
-	@Column(name="arrDep")
-	private String arrDep;
-	@Column(name="carriercode")
 	private String carrierCode;
-	private Integer month;
 	private Integer delay;
 
 }

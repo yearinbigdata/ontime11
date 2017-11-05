@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.DelayDO;
+import com.example.domain.totalDelayDO;
 import com.example.page.PageMaker;
 import com.example.page.PageVO;
 import com.example.repository.DelayRepository;
+import com.example.repository.TotalDelayRepository;
 import com.querydsl.core.types.Predicate;
 
 import lombok.extern.java.Log;
@@ -24,6 +28,7 @@ public class DelayController {
 
 	@Autowired
 	private DelayRepository repo;
+	private TotalDelayRepository repo2;
 	
 	@GetMapping("/home")
 	public String home(@ModelAttribute("pageVO") PageVO vo, Model model) {
@@ -53,8 +58,22 @@ public class DelayController {
 		
 
 		return "thymeleaf/delay/total";
-		
-	}
+	}	
+	
+//	@GetMapping("/total")
+//	public String total(@ModelAttribute("totalDelay") totalDelayDO vo, Model model) {
+//		
+////		Predicate predicate = repo.makePredicate(vo.getType(), vo.getKeyword());
+//		
+//		List<totalDelayDO> result = repo2.findAll();
+////		Page<DelayDO> result = repo.findAll(predicate, pageable);
+//
+//		model.addAttribute("totalDelay", result );
+//		
+//
+//		return "thymeleaf/delay/total";
+//		
+//	}
 	
 	@GetMapping("/month")
 	public String month(@ModelAttribute("pageVO") PageVO vo, Model model) {
